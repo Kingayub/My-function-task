@@ -203,21 +203,23 @@ const users = [
 
 // функция принимает массив и выводит в консоль все имена пользователей
 function getAllNames(array) {
-
+  return array.forEach(el => console.log(el));
 }
+console.log(getAllNames(users))
 
 getAllNames(users);
 
 // функция принимает массив и id пользователя, и выводит в консоль всю информацию (весь объект) об этом пользователе
 function getUserById(array, id) {
-
+  return array.forEach(el => { el.id === id ? console.log(el) : null })
 }
 
 getUserById(users, 2); // должен вывести в консоль объект юзера с id === 2
 
 // функция принимает массив и возвращает новый массив в котором у всех пользователей пропадет поле address
-function removeAddresses(array) {
 
+function removeAddresses(array) {
+  return array.map(el => delete el.address && el)
 }
 
 console.log(removeAddresses(users));
@@ -225,25 +227,29 @@ console.log(removeAddresses(users));
 
 // функция принимает массив и id пользователя, который должен быть удален и возвращает новый массив, уже без этого пользователя.
 function deleteUser(array, id) {
-
+  return array.filter(el => el.id !== id)
 }
 
 console.log(deleteUser(users, 1)); // массив без юзера с id === 1
 
 // функция принимает массив и id пользователя и выводит в консоль его ключ geo
 function getUsersGeo(array, id) {
-
+  return array.find(el => el.id === id ? el : null).address.geo
 }
+console.log(getUsersGeo(users, 3))
 
 
 // функция принимает массив и id пользователя, и выводит в консоль всю информацию (весь объект) о компании этого пользователя
 function getUsersCompany(array, id) {
-
+  return array.filter(el => el.id === id ? el : null)
 }
+console.log(getUsersCompany(users, 4))
 
 // функция принимает массив, id пользователя и новый номер телефона.
-// Функция возвращает новый массив с измененным номером для указанного пользователя. 
+// Функция возвращает новый массив с измененным номером для указанного пользователя.
 
-function changePhone(array, id, phone) {
-  
+function changePhone(array, id, newPhone) {
+  return array.map(el => el.id === id ? { ...el, phone: newPhone } : el)
 }
+
+console.log(changePhone(users, 2, 11111111111))
